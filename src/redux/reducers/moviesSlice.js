@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchPopularMovies = createAsyncThunk('movies/fetchPopularMovies', async () => {
-    const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', {
+export const fetchPopularMovies = createAsyncThunk('movies/fetchPopularMovies', async (page) => {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=24983e85f00f86fe5580319212bd1224&language=en-US&page=${page}`, {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer 24983e85f00f86fe5580319212bd1224'
           }
     })
     const jsonData = await response.json();
@@ -18,6 +17,7 @@ export const moviesSlice = createSlice({
         movies: [],
         loading: false,
         error: false,
+        page: 1,
     },
     reducers: (state) => {
         add: (state, action) => {
@@ -31,7 +31,8 @@ export const moviesSlice = createSlice({
             })
             .addCase(fetchPopularMovies.fulfilled, (state, action) => {
                 state.loading = false;
-                state.data = action.payload
+                state.movies = action.payload.results;
+                state.page = action.payload.page;
             })
             .addCase(fetchPopularMovies.rejected, (state, action) => {
                 state.loading = false;
@@ -39,7 +40,5 @@ export const moviesSlice = createSlice({
             })
     }
 })
-
-//export const { add } = moviesSlice.actions
 
 export default moviesSlice.reducer
