@@ -3,10 +3,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPopularMovies } from './redux/reducers/moviesSlice';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
+import { Container, Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 
 function App() {
   const imageURL = 'https://image.tmdb.org/t/p/original/'
@@ -21,25 +18,25 @@ function App() {
     <div className="App">
       <Container>
         <Row>
-          <Col xs={4}>
+          {/* <Col xs={12} className='content'> */}
             {
               movies.map((movie) => {
                 return (
                   <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`} />
-                    <Card.Body>
-                      <Card.Title>{movie.original_title}</Card.Title>
-                      <Card.Text>
-                        {
-                          movie.overview
-                        }
-                      </Card.Text>
-                    </Card.Body>
+                    <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}/>
+                    <CardBody>
+                        <CardTitle>{movie.original_title}</CardTitle>
+                        <CardText>
+                          {
+                            movie.overview
+                          }
+                        </CardText>                      
+                    </CardBody>
                   </Card>
                 )
               })
             }
-          </Col>
+          {/* </Col> */}
         </Row>
       </Container>
     </div>
