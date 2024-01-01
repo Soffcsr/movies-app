@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,6 +35,9 @@
   to {
     transform: rotate(360deg);
   }
+} */
+.navbar{
+  margin: 0!important;
 }
 
 .content{
