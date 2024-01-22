@@ -3,9 +3,10 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPopularMovies } from './redux/reducers/moviesSlice';
-import { Container, Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import Topbar from './components/Topbar';
 import Paginator from './components/Paginator';
+import Card from './components/card/Card';
 
 function App() {
   const imageURL = 'https://image.tmdb.org/t/p/original/'
@@ -29,17 +30,7 @@ function App() {
             {
               movies.map((movie) => {
                 return (
-                  <Card style={{ width: '18rem' }}>
-                    <img src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}/>
-                    <CardBody>
-                        <CardTitle>{movie.original_title}</CardTitle>
-                        <CardText>
-                          {
-                            movie.overview
-                          }
-                        </CardText>                      
-                    </CardBody>
-                  </Card>
+                    <Card movie={movie}/>
                 )
               })
             }
