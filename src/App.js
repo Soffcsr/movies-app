@@ -7,6 +7,7 @@ import { Container, Row } from 'reactstrap';
 import Topbar from './components/Topbar';
 import Paginator from './components/Paginator';
 import Card from './components/card/Card';
+import Carousel from './components/carousel/Carousel';
 
 function App() {
   const imageURL = 'https://image.tmdb.org/t/p/original/'
@@ -24,9 +25,9 @@ function App() {
   return (
     <div className="App">
       <Topbar/>
+      <Carousel/>
       <Container>
         <Row>
-          {/* <Col xs={12} className='content'> */}
             {
               movies.map((movie) => {
                 return (
@@ -34,9 +35,8 @@ function App() {
                 )
               })
             }
-          {/* </Col> */}
-          <Paginator page={page} changePage={handleOnChangePage}/>
         </Row>
+        <Paginator page={page} changePage={handleOnChangePage}/>
       </Container>
     </div>
   );
